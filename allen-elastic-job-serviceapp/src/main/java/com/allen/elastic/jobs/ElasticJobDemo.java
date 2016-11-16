@@ -9,7 +9,7 @@ import com.dangdang.ddframe.reg.zookeeper.ZookeeperRegistryCenter;
 public class ElasticJobDemo {
 
 	 // 定义Zookeeper注册中心配置对象
-    private ZookeeperConfiguration zkConfig = new ZookeeperConfiguration("localhost:2182", "elastic-job-example", 1000, 3000, 3);
+    private ZookeeperConfiguration zkConfig = new ZookeeperConfiguration("localhost:2182", "elastic-job-example", 1000, 3000, 1);
     
     // 定义Zookeeper注册中心
     private CoordinatorRegistryCenter regCenter = new ZookeeperRegistryCenter(zkConfig);
@@ -18,7 +18,7 @@ public class ElasticJobDemo {
     /*private final TestSimpleJob simpleJobConfig = JobConfigurationFactory.createSimpleJobConfigurationBuilder("simpleElasticDemoJob", 
                     SimpleJobDemo.class, 10, "0/30 * * * * ?").build();*/
     
-    private JobConfiguration jobConfig1 = new JobConfiguration("oneOffElasticDemoJob", TestSimpleJob.class, 10, "0/5 * * * * ?");
+    private JobConfiguration jobConfig1 = new JobConfiguration("oneOffElasticDemoJob", TestSimpleJob.class, 10, "1/10 * * * * ?");
     
     
     /*// 定义高吞吐流式处理的数据流作业配置对象
