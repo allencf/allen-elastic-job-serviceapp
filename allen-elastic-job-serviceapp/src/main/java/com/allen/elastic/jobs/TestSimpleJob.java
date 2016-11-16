@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.dangdang.ddframe.job.api.JobExecutionMultipleShardingContext;
 import com.dangdang.ddframe.job.plugin.job.type.simple.AbstractSimpleElasticJob;
@@ -13,10 +14,14 @@ public class TestSimpleJob extends AbstractSimpleElasticJob{
 	
 	private final static Logger logger = LoggerFactory.getLogger(TestSimpleJob.class);
 	
+	@Value("${zookeeper.registry.address}")
+	private static String location;
+	
 	@Override
 	public void process(JobExecutionMultipleShardingContext shardingContext) {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		logger.info("开始执行TestSimpleJob定时任务,开始时间:" + sf.format(new Date()) );
+		System.out.println(location+"-------------------");
 		
 		try {
 			Thread.sleep(5000);

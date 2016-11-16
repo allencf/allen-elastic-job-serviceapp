@@ -1,5 +1,7 @@
 package com.allen.elastic.jobs;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.dangdang.ddframe.job.api.JobConfiguration;
 import com.dangdang.ddframe.job.api.JobScheduler;
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
@@ -8,7 +10,10 @@ import com.dangdang.ddframe.reg.zookeeper.ZookeeperRegistryCenter;
 
 public class ElasticJobDemo {
 
-	 // 定义Zookeeper注册中心配置对象
+	@Value("${zookeeper.registry.address}")
+	private static String location;
+	
+	// 定义Zookeeper注册中心配置对象
     private ZookeeperConfiguration zkConfig = new ZookeeperConfiguration("localhost:2182", "elastic-job-example", 1000, 3000, 1);
     
     // 定义Zookeeper注册中心
@@ -50,7 +55,8 @@ public class ElasticJobDemo {
 	
     
     public static void main(final String[] args) {
-        new ElasticJobDemo().init();
+        //System.out.println(location);
+    	new ElasticJobDemo().init();
     }
 
 	

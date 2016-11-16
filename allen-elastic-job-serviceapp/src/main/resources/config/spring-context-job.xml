@@ -12,7 +12,7 @@
     
     <!-- 基于spring命名空间配置 -->
     <!--配置作业注册中心 -->
-    <reg:zookeeper id="regCenter" serverLists="127.0.0.1:2182" namespace="dd-job" 
+    <reg:zookeeper id="regCenter" serverLists="localhost:2182" namespace="allen-elastic-job-serviceapp" 
                     baseSleepTimeMilliseconds="1000" maxSleepTimeMilliseconds="3000" maxRetries="1" />
     
     <!-- 配置简单作业-->
