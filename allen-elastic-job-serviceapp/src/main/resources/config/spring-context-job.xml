@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:reg="http://www.dangdang.com/schema/ddframe/reg" 
+	   xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+                           http://www.dangdang.com/schema/ddframe/reg http://www.dangdang.com/schema/ddframe/reg/reg.xsd 
+                           http://www.dangdang.com/schema/ddframe/job http://www.dangdang.com/schema/ddframe/job/job.xsd
+                          ">
+                        
+    <!-- <context:component-scan base-package="com.ddkl.operation.job" /> -->
+    
+    <!-- 基于spring命名空间配置 -->
+    <!--配置作业注册中心 -->
+    <reg:zookeeper id="regCenter" serverLists="127.0.0.1:2182" namespace="dd-job" 
+                    baseSleepTimeMilliseconds="1000" maxSleepTimeMilliseconds="3000" maxRetries="1" />
+    
+    <!-- 配置简单作业-->
+    <!-- <job:simple id="testSimpleElasticJob" class="com.allen.elastic.jobs.TestSimpleJob" registry-center-ref="regCenter" cron="0/10 * * * * ?"   
+                sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" /> -->
+                
+    <job:bean id="testSimpleElasticJob" class="com.allen.elastic.jobs.TestSimpleJob" regCenter="regCenter" cron="0/10 * * * * ?"   
+                shardingTotalCount="1" shardingItemParameters="0=A,1=B,2=C" />
+    
+    
+    <!-- 配置数据流作业-->
+    <!-- <job:dataflow id="throughputDataFlow" class="xxx.MyThroughputDataFlowElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" process-count-interval-seconds="10" concurrent-data-process-thread-count="10" /> -->
+    
+    <!-- 配置脚本作业-->
+    <!-- <job:script id="scriptElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" script-command-line="/your/file/path/demo.sh" /> -->
+    
+    <!-- 配置带监听的简单作业-->
+    <!-- <job:simple id="listenerElasticJob" class="xxx.MySimpleListenerElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?"   sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C">
+        <job:listener class="xx.MySimpleJobListener"/>
+        <job:listener class="xx.MyOnceSimpleJobListener" started-timeout-milliseconds="1000" completed-timeout-milliseconds="2000" />
+    </job:simple> -->
+                        
+	
+		
+ 	<!-- <job:bean id="signPushMsgElasticJob"
+		class="com.ddkl.operation.job.SignPushMsgElasticJob"
+		regCenter="operationjobZookeeper" shardingTotalCount="${ddkl.operationjob.signPushMsgJob.shardingTotalCount}"
+		cron="${ddkl.operationjob.signPushMsgJob.cron}" shardingItemParameters="${ddkl.operationjob.signPushMsgJob.shardingItemParameters}" 
+		monitorExecution="${ddkl.operationjob.signPushMsgJob.monitorExecution}" failover="${ddkl.operationjob.signPushMsgJob.failover}"
+		processCountIntervalSeconds="${ddkl.operationjob.signPushMsgJob.processCountIntervalSeconds}"
+		concurrentDataProcessThreadCount="${ddkl.operationjob.signPushMsgJob.concurrentDataProcessThreadCount}"
+		description="${ddkl.operationjob.signPushMsgJob.description}" disabled="${ddkl.operationjob.signPushMsgJob.disabled}"
+		overwrite="${ddkl.operationjob.signPushMsgJob.overwrite}"/> -->
+		
+	
+	<!-- 橙五活动开始是修改橙五活动的状态(每周五8:00执行) -->
+	<!-- <job:bean id="orangeFriayActivityStartElasticJob" class="com.ddkl.operation.job.OrangeFridayActivityStatusUpdateElasticJob"
+		regCenter="operationjobZookeeper" shardingTotalCount="1"
+		cron="00 01 8 ? * FRI" shardingItemParameters="${ddkl.operationjob.signPushMsgJob.shardingItemParameters}" 
+		monitorExecution="${ddkl.operationjob.signPushMsgJob.monitorExecution}" failover="${ddkl.operationjob.signPushMsgJob.failover}"
+		processCountIntervalSeconds="${ddkl.operationjob.signPushMsgJob.processCountIntervalSeconds}"
+		concurrentDataProcessThreadCount="${ddkl.operationjob.signPushMsgJob.concurrentDataProcessThreadCount}"
+		description="${ddkl.operationjob.signPushMsgJob.description}" disabled="${ddkl.operationjob.signPushMsgJob.disabled}"
+		overwrite="${ddkl.operationjob.signPushMsgJob.overwrite}"/> -->
+		
+	
+	<!-- 橙五活动结束是修改橙五活动的状态 (每周日晚上9:00执行)-->
+	<!-- <job:bean id="orangeFridayActivityEndElasticJob" class="com.ddkl.operation.job.OrangeFridayActivityStatusUpdateElasticJob"
+		regCenter="operationjobZookeeper" shardingTotalCount="1"
+		cron="00 01 21 ? * SUN" shardingItemParameters="${ddkl.operationjob.signPushMsgJob.shardingItemParameters}" 
+		monitorExecution="${ddkl.operationjob.signPushMsgJob.monitorExecution}" failover="${ddkl.operationjob.signPushMsgJob.failover}"
+		processCountIntervalSeconds="${ddkl.operationjob.signPushMsgJob.processCountIntervalSeconds}"
+		concurrentDataProcessThreadCount="${ddkl.operationjob.signPushMsgJob.concurrentDataProcessThreadCount}"
+		description="${ddkl.operationjob.signPushMsgJob.description}" disabled="${ddkl.operationjob.signPushMsgJob.disabled}"
+		overwrite="${ddkl.operationjob.signPushMsgJob.overwrite}"/> -->
+		
+		
+</beans>
