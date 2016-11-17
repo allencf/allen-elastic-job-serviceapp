@@ -11,8 +11,8 @@
     <!-- <context:component-scan base-package="com.ddkl.operation.job" /> -->
     
     <!-- 基于spring命名空间配置 -->
-    <!--配置作业注册中心 -->
-    <reg:zookeeper id="regCenter" serverLists="localhost:2182" namespace="allen-elastic-job-serviceapp" 
+    <!--配置作业注册中心  ${zookeeper.registry.address}  localhost:2182 -->
+    <reg:zookeeper id="regCenter" serverLists="${zookeeper.registry.address}" namespace="allen-elastic-job-serviceapp" 
                     baseSleepTimeMilliseconds="1000" maxSleepTimeMilliseconds="3000" maxRetries="1" />
     
     <!-- 配置简单作业-->

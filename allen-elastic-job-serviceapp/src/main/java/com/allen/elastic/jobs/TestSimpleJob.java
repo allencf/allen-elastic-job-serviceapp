@@ -2,20 +2,21 @@ package com.allen.elastic.jobs;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.dangdang.ddframe.job.api.JobExecutionMultipleShardingContext;
 import com.dangdang.ddframe.job.plugin.job.type.simple.AbstractSimpleElasticJob;
 
+@Component
 public class TestSimpleJob extends AbstractSimpleElasticJob{
 	
 	private final static Logger logger = LoggerFactory.getLogger(TestSimpleJob.class);
 	
 	@Value("${zookeeper.registry.address}")
-	private static String location;
+	String location;
 	
 	@Override
 	public void process(JobExecutionMultipleShardingContext shardingContext) {

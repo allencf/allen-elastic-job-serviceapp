@@ -12,6 +12,9 @@
     http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
     http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.2.xsd" >
     
+    <context:component-scan base-package="com.allen.elastic.jobs,org.apache.zookeeper,org.apache.curator,com.dangdang.ddframe" ><!-- base-package 如果多个，用“,”分隔 -->
+	</context:component-scan>
+    
     <!-- 加载配置文件 -->
     <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <!-- <property name="fileEncoding" value="utf-8" /> -->
@@ -25,6 +28,19 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties" />
     </bean>
+    
+    <!-- <bean id="commonConfigurer" class="com.allen.elastic.configurer.CommonpPropertyPlaceholderConfigurer">
+		<property name="propertySources">
+			<bean class="com.ddkl.common.configuration.ZookeeperSourceFactory" factory-method="create">
+				<constructor-arg name="locations">
+					<list>
+						<value>classpath:application.properties</value>
+					</list>
+				</constructor-arg>
+			</bean>
+	    </property>
+	</bean> -->
+	
     
    <!-- 导入资源文件 -->
    <import resource="classpath:/config/spring-context-job.xml"/>
