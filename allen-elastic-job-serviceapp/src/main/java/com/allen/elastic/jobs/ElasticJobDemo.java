@@ -1,7 +1,9 @@
 package com.allen.elastic.jobs;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.allen.custom.cfg.CustomDefineBean;
 import com.dangdang.ddframe.job.api.JobConfiguration;
 import com.dangdang.ddframe.job.api.JobScheduler;
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
@@ -56,7 +58,13 @@ public class ElasticJobDemo {
     
     public static void main(final String[] args) {
         //System.out.println(location);
-    	new ElasticJobDemo().init();
+    	//new ElasticJobDemo().init();
+    	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
+    	
+    	CustomDefineBean bean = (CustomDefineBean) context.getBean("testBean");
+    	
+    	System.out.println(bean.toString());
+    	
     }
 
 	
