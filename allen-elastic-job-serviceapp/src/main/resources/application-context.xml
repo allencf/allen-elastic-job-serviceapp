@@ -15,34 +15,35 @@
     http://www.allen.com/schema/test  http://www.allen.com/schema/test.xsd
     " >
     
-    <context:component-scan base-package="com.allen.elastic.jobs,org.apache.zookeeper,org.apache.curator,com.dangdang.ddframe" ><!-- base-package 如果多个，用“,”分隔 -->
+    <!-- base-package 如果多个，用“,”分隔 -->
+    <context:component-scan base-package="com.allen.elastic.jobs,org.apache.zookeeper,org.apache.curator,com.dangdang.ddframe">
 	</context:component-scan>
     
     <!-- 加载配置文件 -->
-    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <!-- <property name="fileEncoding" value="utf-8" /> -->
+    <!-- <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="fileEncoding" value="utf-8" />
         <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+                <value>file:/app/application.properties</value>
+                <value>file:c:/application.properties</value>
+				<value>file:/app/ddkl/config/application.properties</value>
+            </list>
+        </property>
+    </bean> -->
+    <!-- 支持注解@Value(value="${properties key}") --> 
+   <!--  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
+    </bean> -->
+    
+    <bean id="propertySource" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+    	<property name="locations">
             <list>
                 <value>classpath:application.properties</value>
             </list>
         </property>
     </bean>
-    <!-- 支持注解@Value(value="${properties key}") --> 
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
-        <property name="properties" ref="configProperties" />
-    </bean>
     
-    <!-- <bean id="commonConfigurer" class="com.allen.elastic.configurer.CommonpPropertyPlaceholderConfigurer">
-		<property name="propertySources">
-			<bean class="com.ddkl.common.configuration.ZookeeperSourceFactory" factory-method="create">
-				<constructor-arg name="locations">
-					<list>
-						<value>classpath:application.properties</value>
-					</list>
-				</constructor-arg>
-			</bean>
-	    </property>
-	</bean> -->
 	
 	<test:testBean id="testBean" modelName="allen" address="zookeeper" port="${zookeeper.registry.address}" />
 	

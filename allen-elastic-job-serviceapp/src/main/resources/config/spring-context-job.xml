@@ -7,13 +7,14 @@
                            http://www.dangdang.com/schema/ddframe/reg http://www.dangdang.com/schema/ddframe/reg/reg.xsd 
                            http://www.dangdang.com/schema/ddframe/job http://www.dangdang.com/schema/ddframe/job/job.xsd
                           ">
-                        
-    <!-- <context:component-scan base-package="com.ddkl.operation.job" /> -->
     
     <!-- 基于spring命名空间配置 -->
     <!--配置作业注册中心  ${zookeeper.registry.address}  localhost:2182 -->
     <reg:zookeeper id="regCenter" serverLists="${zookeeper.registry.address}" namespace="allen-elastic-job-serviceapp" 
                     baseSleepTimeMilliseconds="1000" maxSleepTimeMilliseconds="3000" maxRetries="1" />
+    
+    <!-- <reg:placeholder registerRef="regCenter" /> -->
+    
     
     <!-- 配置简单作业-->
     <!-- <job:simple id="testSimpleElasticJob" class="com.allen.elastic.jobs.TestSimpleJob" registry-center-ref="regCenter" cron="0/10 * * * * ?"   

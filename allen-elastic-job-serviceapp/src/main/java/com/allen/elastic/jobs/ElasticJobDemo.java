@@ -2,11 +2,11 @@ package com.allen.elastic.jobs;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.allen.custom.cfg.CustomDefineBean;
 import com.dangdang.ddframe.job.api.JobConfiguration;
 import com.dangdang.ddframe.job.api.JobScheduler;
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
+import com.dangdang.ddframe.reg.spring.namespace.SpringZookeeperRegistryCenter;
 import com.dangdang.ddframe.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.reg.zookeeper.ZookeeperRegistryCenter;
 
@@ -26,6 +26,8 @@ public class ElasticJobDemo {
                     SimpleJobDemo.class, 10, "0/30 * * * * ?").build();*/
     
     private JobConfiguration jobConfig1 = new JobConfiguration("oneOffElasticDemoJob", TestSimpleJob.class, 10, "1/10 * * * * ?");
+
+	private static ClassPathXmlApplicationContext context;
     
     
     /*// 定义高吞吐流式处理的数据流作业配置对象
@@ -57,13 +59,16 @@ public class ElasticJobDemo {
 	
     
     public static void main(final String[] args) {
-        //System.out.println(location);
-    	//new ElasticJobDemo().init();
-    	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
+        context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
     	
     	CustomDefineBean bean = (CustomDefineBean) context.getBean("testBean");
     	
     	System.out.println(bean.toString());
+    	
+    	
+    	SpringZookeeperRegistryCenter center = (SpringZookeeperRegistryCenter) context.getBean("regCenter");
+    	
+    	System.out.println(center.toString());
     	
     }
 
