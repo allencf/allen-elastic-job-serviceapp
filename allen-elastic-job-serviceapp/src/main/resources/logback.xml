@@ -21,6 +21,8 @@
        </layout>  
     </appender>   
 
+	<logger name="com.allen.elastic.startup" level="INFO" />
+	
 	<!-- 日志输出级别 -->
 	<root level="DEBUG">
 		<appender-ref ref="stdout" />
