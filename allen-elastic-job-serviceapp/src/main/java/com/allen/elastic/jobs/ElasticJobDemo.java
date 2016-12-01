@@ -1,5 +1,8 @@
 package com.allen.elastic.jobs;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.allen.custom.cfg.CustomDefineBean;
@@ -61,15 +64,17 @@ public class ElasticJobDemo {
     public static void main(final String[] args) {
         context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
     	
-    	CustomDefineBean bean = (CustomDefineBean) context.getBean("testBean");
+    	/*CustomDefineBean bean = (CustomDefineBean) context.getBean("testBean");
     	
     	System.out.println(bean.toString());
     	
     	
     	SpringZookeeperRegistryCenter center = (SpringZookeeperRegistryCenter) context.getBean("regCenter");
     	
-    	System.out.println(center.toString());
+    	System.out.println(center.toString());*/
     	
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("testkey", "testValue");
     }
 
 	
